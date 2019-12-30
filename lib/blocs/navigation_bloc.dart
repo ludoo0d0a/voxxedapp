@@ -14,7 +14,7 @@
 
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' hide Action;
 import 'package:voxxedapp/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 

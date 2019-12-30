@@ -64,15 +64,15 @@ class SpeakerBloc extends SimpleBloc<AppState> {
 
   Future<void> _refreshSpeakersForConference(DispatchFunction dispatch,
       AppState state, RefreshSpeakersForConferenceAction action) async {
-    String cfpVersion = state.conferences[action.conferenceId]?.cfpVersion;
+    String cfpKey = state.conferences[action.conferenceId]?.cfpKey;
     String cfpUrl = state.conferences[action.conferenceId]?.cfpURL;
 
-    if (cfpVersion == null || cfpUrl == null) {
+    if (cfpKey == null || cfpUrl == null) {
       log.warning(
           'Couldn\'t refresh speakers for conference ${action.conferenceId}.');
     } else {
       try {
-        final speakers = await webClient.fetchSpeakers(cfpUrl, cfpVersion);
+        final speakers = await webClient.fetchSpeakers(cfpUrl, cfpKey);
         dispatch(RefreshedSpeakersForConferenceAction(
             speakers, action.conferenceId));
       } on WebClientException catch (e) {
@@ -84,16 +84,16 @@ class SpeakerBloc extends SimpleBloc<AppState> {
 
   Future<void> _refreshSpeakerForConference(DispatchFunction dispatch,
       AppState state, RefreshSpeakerForConferenceAction action) async {
-    String cfpVersion = state.conferences[action.conferenceId]?.cfpVersion;
+    String cfpKey = state.conferences[action.conferenceId]?.cfpKey;
     String cfpUrl = state.conferences[action.conferenceId]?.cfpURL;
 
-    if (cfpVersion == null || cfpUrl == null) {
+    if (cfpKey == null || cfpUrl == null) {
       log.warning('Couldn\'t refresh speaker ${action.uuid} for conference'
           ' #${action.conferenceId}.');
     } else {
       try {
         final speaker =
-            await webClient.fetchSpeaker(cfpUrl, cfpVersion, action.uuid);
+            await webClient.fetchSpeaker(cfpUrl, cfpKey, action.uuid);
         dispatch(
             RefreshedSpeakerForConferenceAction(speaker, action.conferenceId));
       } on WebClientException catch (e) {

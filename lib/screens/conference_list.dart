@@ -100,7 +100,7 @@ class ConferenceListScreen extends StatelessWidget {
                   ),
                   color: Color(0xa0000000),
                   child: Text(
-                    '${conference.fromDate} - ${conference.endDate}',
+                    '${conference.fromDate} - ${conference.toDate}',
                     style: TextStyle(
                       color: Colors.white,
                     ),

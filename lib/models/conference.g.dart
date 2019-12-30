@@ -6,19 +6,6 @@ part of 'conference.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: unnecessary_const
-// ignore_for_file: unnecessary_new
-// ignore_for_file: test_types_in_equals
-
 Serializer<Conference> _$conferenceSerializer = new _$ConferenceSerializer();
 
 class _$ConferenceSerializer implements StructuredSerializer<Conference> {
@@ -28,7 +15,7 @@ class _$ConferenceSerializer implements StructuredSerializer<Conference> {
   final String wireName = 'Conference';
 
   @override
-  Iterable serialize(Serializers serializers, Conference object,
+  Iterable<Object> serialize(Serializers serializers, Conference object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -41,27 +28,18 @@ class _$ConferenceSerializer implements StructuredSerializer<Conference> {
       'imageURL',
       serializers.serialize(object.imageURL,
           specifiedType: const FullType(String)),
+      'apiURL',
+      serializers.serialize(object.apiURL,
+          specifiedType: const FullType(String)),
       'fromDate',
       serializers.serialize(object.fromDate,
           specifiedType: const FullType(String)),
-      'endDate',
-      serializers.serialize(object.endDate,
+      'toDate',
+      serializers.serialize(object.toDate,
           specifiedType: const FullType(String)),
-      'eventType',
-      serializers.serialize(object.eventType,
-          specifiedType: const FullType(EventType)),
-      'tracks',
-      serializers.serialize(object.tracks,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Track)])),
-      'languages',
-      serializers.serialize(object.languages,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Language)])),
-      'sessionTypes',
-      serializers.serialize(object.sessionTypes,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(SessionType)])),
+      'eventCategory',
+      serializers.serialize(object.eventCategory,
+          specifiedType: const FullType(EventCategory)),
     ];
     if (object.description != null) {
       result
@@ -135,18 +113,38 @@ class _$ConferenceSerializer implements StructuredSerializer<Conference> {
         ..add(serializers.serialize(object.cfpEndDate,
             specifiedType: const FullType(String)));
     }
-    if (object.cfpVersion != null) {
+    if (object.cfpKey != null) {
       result
-        ..add('cfpVersion')
-        ..add(serializers.serialize(object.cfpVersion,
+        ..add('cfpKey')
+        ..add(serializers.serialize(object.cfpKey,
             specifiedType: const FullType(String)));
     }
-
+    if (object.tracks != null) {
+      result
+        ..add('tracks')
+        ..add(serializers.serialize(object.tracks,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Track)])));
+    }
+    if (object.languages != null) {
+      result
+        ..add('languages')
+        ..add(serializers.serialize(object.languages,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Language)])));
+    }
+    if (object.sessionTypes != null) {
+      result
+        ..add('sessionTypes')
+        ..add(serializers.serialize(object.sessionTypes,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(SessionType)])));
+    }
     return result;
   }
 
   @override
-  Conference deserialize(Serializers serializers, Iterable serialized,
+  Conference deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ConferenceBuilder();
 
@@ -172,17 +170,21 @@ class _$ConferenceSerializer implements StructuredSerializer<Conference> {
           result.imageURL = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'apiURL':
+          result.apiURL = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'fromDate':
           result.fromDate = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'endDate':
-          result.endDate = serializers.deserialize(value,
+        case 'toDate':
+          result.toDate = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'eventType':
-          result.eventType = serializers.deserialize(value,
-              specifiedType: const FullType(EventType)) as EventType;
+        case 'eventCategory':
+          result.eventCategory = serializers.deserialize(value,
+              specifiedType: const FullType(EventCategory)) as EventCategory;
           break;
         case 'description':
           result.description = serializers.deserialize(value,
@@ -232,26 +234,27 @@ class _$ConferenceSerializer implements StructuredSerializer<Conference> {
           result.cfpEndDate = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'cfpVersion':
-          result.cfpVersion = serializers.deserialize(value,
+        case 'cfpKey':
+          result.cfpKey = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'tracks':
           result.tracks.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Track)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'languages':
           result.languages.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Language)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Language)]))
+              as BuiltList<dynamic>);
           break;
         case 'sessionTypes':
           result.sessionTypes.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(SessionType)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -270,11 +273,13 @@ class _$Conference extends Conference {
   @override
   final String imageURL;
   @override
+  final String apiURL;
+  @override
   final String fromDate;
   @override
-  final String endDate;
+  final String toDate;
   @override
-  final EventType eventType;
+  final EventCategory eventCategory;
   @override
   final String description;
   @override
@@ -300,7 +305,7 @@ class _$Conference extends Conference {
   @override
   final String cfpEndDate;
   @override
-  final String cfpVersion;
+  final String cfpKey;
   @override
   final BuiltList<Track> tracks;
   @override
@@ -308,7 +313,7 @@ class _$Conference extends Conference {
   @override
   final BuiltList<SessionType> sessionTypes;
 
-  factory _$Conference([void updates(ConferenceBuilder b)]) =>
+  factory _$Conference([void Function(ConferenceBuilder) updates]) =>
       (new ConferenceBuilder()..update(updates)).build();
 
   _$Conference._(
@@ -316,9 +321,10 @@ class _$Conference extends Conference {
       this.name,
       this.website,
       this.imageURL,
+      this.apiURL,
       this.fromDate,
-      this.endDate,
-      this.eventType,
+      this.toDate,
+      this.eventCategory,
       this.description,
       this.scheduleURL,
       this.eventImagesURL,
@@ -331,7 +337,7 @@ class _$Conference extends Conference {
       this.timezone,
       this.cfpFromDate,
       this.cfpEndDate,
-      this.cfpVersion,
+      this.cfpKey,
       this.tracks,
       this.languages,
       this.sessionTypes})
@@ -348,28 +354,22 @@ class _$Conference extends Conference {
     if (imageURL == null) {
       throw new BuiltValueNullFieldError('Conference', 'imageURL');
     }
+    if (apiURL == null) {
+      throw new BuiltValueNullFieldError('Conference', 'apiURL');
+    }
     if (fromDate == null) {
       throw new BuiltValueNullFieldError('Conference', 'fromDate');
     }
-    if (endDate == null) {
-      throw new BuiltValueNullFieldError('Conference', 'endDate');
+    if (toDate == null) {
+      throw new BuiltValueNullFieldError('Conference', 'toDate');
     }
-    if (eventType == null) {
-      throw new BuiltValueNullFieldError('Conference', 'eventType');
-    }
-    if (tracks == null) {
-      throw new BuiltValueNullFieldError('Conference', 'tracks');
-    }
-    if (languages == null) {
-      throw new BuiltValueNullFieldError('Conference', 'languages');
-    }
-    if (sessionTypes == null) {
-      throw new BuiltValueNullFieldError('Conference', 'sessionTypes');
+    if (eventCategory == null) {
+      throw new BuiltValueNullFieldError('Conference', 'eventCategory');
     }
   }
 
   @override
-  Conference rebuild(void updates(ConferenceBuilder b)) =>
+  Conference rebuild(void Function(ConferenceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -383,9 +383,10 @@ class _$Conference extends Conference {
         name == other.name &&
         website == other.website &&
         imageURL == other.imageURL &&
+        apiURL == other.apiURL &&
         fromDate == other.fromDate &&
-        endDate == other.endDate &&
-        eventType == other.eventType &&
+        toDate == other.toDate &&
+        eventCategory == other.eventCategory &&
         description == other.description &&
         scheduleURL == other.scheduleURL &&
         eventImagesURL == other.eventImagesURL &&
@@ -398,7 +399,7 @@ class _$Conference extends Conference {
         timezone == other.timezone &&
         cfpFromDate == other.cfpFromDate &&
         cfpEndDate == other.cfpEndDate &&
-        cfpVersion == other.cfpVersion &&
+        cfpKey == other.cfpKey &&
         tracks == other.tracks &&
         languages == other.languages &&
         sessionTypes == other.sessionTypes;
@@ -424,10 +425,10 @@ class _$Conference extends Conference {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc($jc(0, id.hashCode), name.hashCode), website.hashCode), imageURL.hashCode),
+                                                                            $jc($jc($jc($jc($jc($jc(0, id.hashCode), name.hashCode), website.hashCode), imageURL.hashCode), apiURL.hashCode),
                                                                                 fromDate.hashCode),
-                                                                            endDate.hashCode),
-                                                                        eventType.hashCode),
+                                                                            toDate.hashCode),
+                                                                        eventCategory.hashCode),
                                                                     description.hashCode),
                                                                 scheduleURL.hashCode),
                                                             eventImagesURL.hashCode),
@@ -440,7 +441,7 @@ class _$Conference extends Conference {
                                 timezone.hashCode),
                             cfpFromDate.hashCode),
                         cfpEndDate.hashCode),
-                    cfpVersion.hashCode),
+                    cfpKey.hashCode),
                 tracks.hashCode),
             languages.hashCode),
         sessionTypes.hashCode));
@@ -453,9 +454,10 @@ class _$Conference extends Conference {
           ..add('name', name)
           ..add('website', website)
           ..add('imageURL', imageURL)
+          ..add('apiURL', apiURL)
           ..add('fromDate', fromDate)
-          ..add('endDate', endDate)
-          ..add('eventType', eventType)
+          ..add('toDate', toDate)
+          ..add('eventCategory', eventCategory)
           ..add('description', description)
           ..add('scheduleURL', scheduleURL)
           ..add('eventImagesURL', eventImagesURL)
@@ -468,7 +470,7 @@ class _$Conference extends Conference {
           ..add('timezone', timezone)
           ..add('cfpFromDate', cfpFromDate)
           ..add('cfpEndDate', cfpEndDate)
-          ..add('cfpVersion', cfpVersion)
+          ..add('cfpKey', cfpKey)
           ..add('tracks', tracks)
           ..add('languages', languages)
           ..add('sessionTypes', sessionTypes))
@@ -495,17 +497,22 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
   String get imageURL => _$this._imageURL;
   set imageURL(String imageURL) => _$this._imageURL = imageURL;
 
+  String _apiURL;
+  String get apiURL => _$this._apiURL;
+  set apiURL(String apiURL) => _$this._apiURL = apiURL;
+
   String _fromDate;
   String get fromDate => _$this._fromDate;
   set fromDate(String fromDate) => _$this._fromDate = fromDate;
 
-  String _endDate;
-  String get endDate => _$this._endDate;
-  set endDate(String endDate) => _$this._endDate = endDate;
+  String _toDate;
+  String get toDate => _$this._toDate;
+  set toDate(String toDate) => _$this._toDate = toDate;
 
-  EventType _eventType;
-  EventType get eventType => _$this._eventType;
-  set eventType(EventType eventType) => _$this._eventType = eventType;
+  EventCategory _eventCategory;
+  EventCategory get eventCategory => _$this._eventCategory;
+  set eventCategory(EventCategory eventCategory) =>
+      _$this._eventCategory = eventCategory;
 
   String _description;
   String get description => _$this._description;
@@ -556,9 +563,9 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
   String get cfpEndDate => _$this._cfpEndDate;
   set cfpEndDate(String cfpEndDate) => _$this._cfpEndDate = cfpEndDate;
 
-  String _cfpVersion;
-  String get cfpVersion => _$this._cfpVersion;
-  set cfpVersion(String cfpVersion) => _$this._cfpVersion = cfpVersion;
+  String _cfpKey;
+  String get cfpKey => _$this._cfpKey;
+  set cfpKey(String cfpKey) => _$this._cfpKey = cfpKey;
 
   ListBuilder<Track> _tracks;
   ListBuilder<Track> get tracks => _$this._tracks ??= new ListBuilder<Track>();
@@ -584,9 +591,10 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
       _name = _$v.name;
       _website = _$v.website;
       _imageURL = _$v.imageURL;
+      _apiURL = _$v.apiURL;
       _fromDate = _$v.fromDate;
-      _endDate = _$v.endDate;
-      _eventType = _$v.eventType;
+      _toDate = _$v.toDate;
+      _eventCategory = _$v.eventCategory;
       _description = _$v.description;
       _scheduleURL = _$v.scheduleURL;
       _eventImagesURL = _$v.eventImagesURL;
@@ -599,7 +607,7 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
       _timezone = _$v.timezone;
       _cfpFromDate = _$v.cfpFromDate;
       _cfpEndDate = _$v.cfpEndDate;
-      _cfpVersion = _$v.cfpVersion;
+      _cfpKey = _$v.cfpKey;
       _tracks = _$v.tracks?.toBuilder();
       _languages = _$v.languages?.toBuilder();
       _sessionTypes = _$v.sessionTypes?.toBuilder();
@@ -617,7 +625,7 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
   }
 
   @override
-  void update(void updates(ConferenceBuilder b)) {
+  void update(void Function(ConferenceBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -631,9 +639,10 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
               name: name,
               website: website,
               imageURL: imageURL,
+              apiURL: apiURL,
               fromDate: fromDate,
-              endDate: endDate,
-              eventType: eventType,
+              toDate: toDate,
+              eventCategory: eventCategory,
               description: description,
               scheduleURL: scheduleURL,
               eventImagesURL: eventImagesURL,
@@ -646,19 +655,19 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
               timezone: timezone,
               cfpFromDate: cfpFromDate,
               cfpEndDate: cfpEndDate,
-              cfpVersion: cfpVersion,
-              tracks: tracks.build(),
-              languages: languages.build(),
-              sessionTypes: sessionTypes.build());
+              cfpKey: cfpKey,
+              tracks: _tracks?.build(),
+              languages: _languages?.build(),
+              sessionTypes: _sessionTypes?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'tracks';
-        tracks.build();
+        _tracks?.build();
         _$failedField = 'languages';
-        languages.build();
+        _languages?.build();
         _$failedField = 'sessionTypes';
-        sessionTypes.build();
+        _sessionTypes?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Conference', _$failedField, e.toString());
@@ -669,3 +678,5 @@ class ConferenceBuilder implements Builder<Conference, ConferenceBuilder> {
     return _$result;
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -125,12 +125,12 @@ class ConferenceInfoPanel extends StatelessWidget {
       BuildContext context, Conference conference, ThemeData theme) {
     String dateStr;
 
-    if (conference.fromDate == null && conference.endDate == null) {
+    if (conference.fromDate == null && conference.toDate == null) {
       dateStr = 'Not yet determined';
-    } else if (conference.fromDate == conference.endDate) {
+    } else if (conference.fromDate == conference.toDate) {
       dateStr = conference.fromDate;
     } else {
-      dateStr = '${conference.fromDate} to ${conference.endDate}';
+      dateStr = '${conference.fromDate} to ${conference.toDate}';
     }
 
     return Padding(

@@ -66,15 +66,15 @@ class ScheduleBloc extends SimpleBloc<AppState> {
 
   Future<void> _refreshSchedules(DispatchFunction dispatcher, AppState state,
       RefreshSchedulesAction action) async {
-    String cfpVersion = state.conferences[action.conferenceId]?.cfpVersion;
+    String cfpKey = state.conferences[action.conferenceId]?.cfpKey;
     String cfpUrl = state.conferences[action.conferenceId]?.cfpURL;
 
-    if (cfpVersion == null || cfpUrl == null) {
+    if (cfpKey == null || cfpUrl == null) {
       log.warning(
           'Couldn\'t refresh schedules for conference ${action.conferenceId}.');
     } else {
       try {
-        final schedules = await webClient.fetchSchedules(cfpUrl, cfpVersion);
+        final schedules = await webClient.fetchSchedules(cfpUrl, cfpKey);
         dispatcher(RefreshedSchedulesAction(schedules, action.conferenceId));
       } on WebClientException catch (e) {
         logException('_refreshSchedules', e.message);
@@ -85,16 +85,16 @@ class ScheduleBloc extends SimpleBloc<AppState> {
 
   Future<void> _refreshScheduleSlots(DispatchFunction dispatcher,
       AppState state, RefreshScheduleSlotsAction action) async {
-    String cfpVersion = state.conferences[action.conferenceId]?.cfpVersion;
+    String cfpKey = state.conferences[action.conferenceId]?.cfpKey;
     String cfpUrl = state.conferences[action.conferenceId]?.cfpURL;
 
-    if (cfpVersion == null || cfpUrl == null) {
+    if (cfpKey == null || cfpUrl == null) {
       log.warning('Couldn\'t refresh schedule for conference'
           ' #${action.conferenceId}.');
     } else {
       try {
         final slots =
-            await webClient.fetchScheduleSlots(cfpUrl, cfpVersion, action.day);
+            await webClient.fetchScheduleSlots(cfpUrl, cfpKey, action.day);
         dispatcher(RefreshedScheduleSlotsAction(
             slots, action.conferenceId, action.day));
       } on WebClientException catch (e) {

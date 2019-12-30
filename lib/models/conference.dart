@@ -36,11 +36,13 @@ abstract class Conference implements Built<Conference, ConferenceBuilder> {
 
   String get imageURL;
 
+  String get apiURL;
+
   String get fromDate;
 
-  String get endDate;
+  String get toDate;
 
-  EventType get eventType;
+  EventCategory get eventCategory;
 
   @nullable
   String get description;
@@ -79,12 +81,15 @@ abstract class Conference implements Built<Conference, ConferenceBuilder> {
   String get cfpEndDate;
 
   @nullable
-  String get cfpVersion;
+  String get cfpKey;
 
+  @nullable
   BuiltList<Track> get tracks;
 
+  @nullable
   BuiltList<Language> get languages;
 
+  @nullable
   BuiltList<SessionType> get sessionTypes;
 
   Conference._();

@@ -18,14 +18,14 @@ import 'package:built_value/serializer.dart';
 
 part 'enums.g.dart';
 
-class EventType extends EnumClass {
-  static Serializer<EventType> get serializer => _$eventTypeSerializer;
+class EventCategory extends EnumClass {
+  static Serializer<EventCategory> get serializer => _$eventCategorySerializer;
 
-  static const EventType VOXXED = _$VOXXED;
-  static const EventType DEVOXX = _$DEVOXX;
+  static const EventCategory VOXXED = _$VOXXED;
+  static const EventCategory DEVOXX = _$DEVOXX;
 
-  const EventType._(String name) : super(name);
+  const EventCategory._(String name) : super(name);
 
-  static BuiltSet<EventType> get values => _$values;
-  static EventType valueOf(String name) => _$valueOf(name);
+  static BuiltSet<EventCategory> get values => _$values;
+  static EventCategory valueOf(String name) => _$valueOf(name);
 }

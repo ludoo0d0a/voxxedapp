@@ -6,23 +6,10 @@ part of 'enums.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: unnecessary_const
-// ignore_for_file: unnecessary_new
-// ignore_for_file: test_types_in_equals
+const EventCategory _$VOXXED = const EventCategory._('VOXXED');
+const EventCategory _$DEVOXX = const EventCategory._('DEVOXX');
 
-const EventType _$VOXXED = const EventType._('VOXXED');
-const EventType _$DEVOXX = const EventType._('DEVOXX');
-
-EventType _$valueOf(String name) {
+EventCategory _$valueOf(String name) {
   switch (name) {
     case 'VOXXED':
       return _$VOXXED;
@@ -33,26 +20,30 @@ EventType _$valueOf(String name) {
   }
 }
 
-final BuiltSet<EventType> _$values = new BuiltSet<EventType>(const <EventType>[
+final BuiltSet<EventCategory> _$values =
+    new BuiltSet<EventCategory>(const <EventCategory>[
   _$VOXXED,
   _$DEVOXX,
 ]);
 
-Serializer<EventType> _$eventTypeSerializer = new _$EventTypeSerializer();
+Serializer<EventCategory> _$eventCategorySerializer =
+    new _$EventCategorySerializer();
 
-class _$EventTypeSerializer implements PrimitiveSerializer<EventType> {
+class _$EventCategorySerializer implements PrimitiveSerializer<EventCategory> {
   @override
-  final Iterable<Type> types = const <Type>[EventType];
+  final Iterable<Type> types = const <Type>[EventCategory];
   @override
-  final String wireName = 'EventType';
+  final String wireName = 'EventCategory';
 
   @override
-  Object serialize(Serializers serializers, EventType object,
+  Object serialize(Serializers serializers, EventCategory object,
           {FullType specifiedType = FullType.unspecified}) =>
       object.name;
 
   @override
-  EventType deserialize(Serializers serializers, Object serialized,
+  EventCategory deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      EventType.valueOf(serialized as String);
+      EventCategory.valueOf(serialized as String);
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

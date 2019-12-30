@@ -33,27 +33,29 @@ class WebClient {
   static const _requestTimeoutDuration = Duration(seconds: 10);
   static const maxAttempts = 3;
 
+  static const String url_base = "https://www.devoxxians.com";
+
   const WebClient();
 
   String createAllConferencesUrl() =>
-      'https://api.voxxed.com/api/voxxeddays/events/future/voxxed';
+      '${url_base}/api/voxxeddays/events/future/voxxed';
 
   String createSingleConferenceUrl(int id) =>
-      'https://api.voxxed.com/api/voxxeddays/events/$id';
+      '${url_base}/api/voxxeddays/events/$id';
 
-  String createAllSpeakersUrl(String cfpUrl, String cfpVersion) =>
-      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpVersion/speakers';
+  String createAllSpeakersUrl(String cfpUrl, String cfpKey) =>
+      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpKey/speakers';
 
   String createSingleSpeakerUrl(
-          String cfpUrl, String cfpVersion, String uuid) =>
-      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpVersion/speakers/$uuid';
+          String cfpUrl, String cfpKey, String uuid) =>
+      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpKey/speakers/$uuid';
 
-  String createAllSchedulesUrl(String cfpUrl, String cfpVersion) =>
-      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpVersion/schedules/';
+  String createAllSchedulesUrl(String cfpUrl, String cfpKey) =>
+      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpKey/schedules/';
 
   String createSingleScheduleUrl(
-          String cfpUrl, String cfpVersion, String day) =>
-      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpVersion/schedules/$day/';
+          String cfpUrl, String cfpKey, String day) =>
+      '${_trimFinalSlash(cfpUrl)}/api/conferences/$cfpKey/schedules/$day/';
 
   // Some (but not all) CFP Urls come back with a trailing slash. This method
   // removes any that are found, so the URL creation getters above always return
@@ -121,13 +123,13 @@ class WebClient {
   }
 
   Future<BuiltList<Speaker>> fetchSpeakers(
-      String cfpUrl, String cfpVersion) async {
+      String cfpUrl, String cfpKey) async {
     try {
       final response =
-          await _makeRequest(createAllSpeakersUrl(cfpUrl, cfpVersion));
+          await _makeRequest(createAllSpeakersUrl(cfpUrl, cfpKey));
 
       if (response.statusCode != 200) {
-        throw WebClientException('Failed to fetch speakers for $cfpVersion, '
+        throw WebClientException('Failed to fetch speakers for $cfpKey, '
             'status: ${response.statusCode}');
       }
 
@@ -146,14 +148,14 @@ class WebClient {
   }
 
   Future<Speaker> fetchSpeaker(
-      String cfpUrl, String cfpVersion, String uuid) async {
+      String cfpUrl, String cfpKey, String uuid) async {
     try {
       final response =
-          await _makeRequest(createSingleSpeakerUrl(cfpUrl, cfpVersion, uuid));
+          await _makeRequest(createSingleSpeakerUrl(cfpUrl, cfpKey, uuid));
 
       if (response.statusCode != 200) {
         throw WebClientException('Failed to fetch speaker for $uuid at '
-            '$cfpVersion, status: ${response.statusCode}');
+            '$cfpKey, status: ${response.statusCode}');
       }
 
       final parsedJson = json.decode(response.body);
@@ -169,13 +171,13 @@ class WebClient {
   }
 
   Future<BuiltList<Schedule>> fetchSchedules(
-      String cfpUrl, String cfpVersion) async {
+      String cfpUrl, String cfpKey) async {
     try {
       final response =
-          await _makeRequest(createAllSchedulesUrl(cfpUrl, cfpVersion));
+          await _makeRequest(createAllSchedulesUrl(cfpUrl, cfpKey));
 
       if (response.statusCode != 200) {
-        throw WebClientException('Failed to fetch schedules for $cfpVersion, '
+        throw WebClientException('Failed to fetch schedules for $cfpKey, '
             'status: ${response.statusCode}');
       }
 
@@ -206,14 +208,14 @@ class WebClient {
   }
 
   Future<BuiltList<ScheduleSlot>> fetchScheduleSlots(
-      String cfpUrl, String cfpVersion, String day) async {
+      String cfpUrl, String cfpKey, String day) async {
     try {
       final response =
-          await _makeRequest(createSingleScheduleUrl(cfpUrl, cfpVersion, day));
+          await _makeRequest(createSingleScheduleUrl(cfpUrl, cfpKey, day));
 
       if (response.statusCode != 200) {
         throw WebClientException('Failed to fetch $day schedule at '
-            '$cfpVersion, status: ${response.statusCode}');
+            '$cfpKey, status: ${response.statusCode}');
       }
 
       final parsedJson = json.decode(response.body)['slots'];

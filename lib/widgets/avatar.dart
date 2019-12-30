@@ -41,14 +41,14 @@ class Avatar extends StatelessWidget {
     final content = imageUrl != null
         ? CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: Container(
+            placeholder: (context, url) => Container(
               color: Color(0x40000000),
               child: Icon(
                 placeholderIcon,
                 color: Colors.grey,
               ),
             ),
-            errorWidget: Container(
+            errorWidget: (context, url, error) => Container(
               color: Color(0x40000000),
               child: Icon(
                 errorIcon,

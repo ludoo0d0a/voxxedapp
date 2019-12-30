@@ -34,7 +34,7 @@ part 'serializers.g.dart';
 @SerializersFor(const [
   AppState,
   Conference,
-  EventType,
+  EventCategory,
   Language,
   Schedule,
   ScheduleBreak,

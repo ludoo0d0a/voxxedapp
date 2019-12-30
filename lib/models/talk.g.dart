@@ -6,19 +6,6 @@ part of 'talk.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: unnecessary_const
-// ignore_for_file: unnecessary_new
-// ignore_for_file: test_types_in_equals
-
 Serializer<Talk> _$talkSerializer = new _$TalkSerializer();
 
 class _$TalkSerializer implements StructuredSerializer<Talk> {
@@ -28,7 +15,7 @@ class _$TalkSerializer implements StructuredSerializer<Talk> {
   final String wireName = 'Talk';
 
   @override
-  Iterable serialize(Serializers serializers, Talk object,
+  Iterable<Object> serialize(Serializers serializers, Talk object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -57,7 +44,7 @@ class _$TalkSerializer implements StructuredSerializer<Talk> {
   }
 
   @override
-  Talk deserialize(Serializers serializers, Iterable serialized,
+  Talk deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TalkBuilder();
 
@@ -95,7 +82,7 @@ class _$TalkSerializer implements StructuredSerializer<Talk> {
           result.speakerUuids.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -120,7 +107,7 @@ class _$Talk extends Talk {
   @override
   final BuiltList<String> speakerUuids;
 
-  factory _$Talk([void updates(TalkBuilder b)]) =>
+  factory _$Talk([void Function(TalkBuilder) updates]) =>
       (new TalkBuilder()..update(updates)).build();
 
   _$Talk._(
@@ -156,7 +143,7 @@ class _$Talk extends Talk {
   }
 
   @override
-  Talk rebuild(void updates(TalkBuilder b)) =>
+  Talk rebuild(void Function(TalkBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -261,7 +248,7 @@ class TalkBuilder implements Builder<Talk, TalkBuilder> {
   }
 
   @override
-  void update(void updates(TalkBuilder b)) {
+  void update(void Function(TalkBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -293,3 +280,5 @@ class TalkBuilder implements Builder<Talk, TalkBuilder> {
     return _$result;
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

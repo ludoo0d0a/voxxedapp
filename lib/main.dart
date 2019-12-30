@@ -34,6 +34,8 @@ import 'package:voxxedapp/screens/talk_detail.dart';
 import 'package:voxxedapp/screens/track_detail.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -64,7 +66,7 @@ Future main() async {
   // request to the server for the list of conferences will automatically
   // follow. If both fail, the app can't run, and will halt on the splash
   // screen with a warning message.
-  store.dispatcher(LoadAppStateAction());
+  store.dispatch(LoadAppStateAction());
 
   runApp(new VoxxedDayApp(store, navigatorKey));
 }

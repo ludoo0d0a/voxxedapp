@@ -119,9 +119,9 @@ class ConferenceBloc extends SimpleBloc<AppState> {
       for (Conference oldConf in oldConfs) {
         b.conferences[oldConf.id].rebuild((cb) => cb
           ..name = oldConf.name
-          ..eventType = oldConf.eventType
+          ..eventCategory = oldConf.eventCategory
           ..fromDate = oldConf.fromDate
-          ..endDate = oldConf.endDate
+          ..toDate = oldConf.toDate
           ..imageURL = oldConf.imageURL
           ..website = oldConf.website);
       }

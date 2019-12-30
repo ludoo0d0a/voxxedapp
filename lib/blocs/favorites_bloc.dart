@@ -41,7 +41,7 @@ class FavoritesBloc extends SimpleBloc<AppState> {
 
     _plugin.initialize(
       initializationSettings,
-      selectNotification: _handleNotificationSelection,
+      onSelectNotification: _handleNotificationSelection,
     );
   }
 

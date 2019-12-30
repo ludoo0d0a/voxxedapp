@@ -6,19 +6,6 @@ part of 'session_type.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line
-// ignore_for_file: annotate_overrides
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_catches_without_on_clauses
-// ignore_for_file: avoid_returning_this
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: sort_constructors_first
-// ignore_for_file: unnecessary_const
-// ignore_for_file: unnecessary_new
-// ignore_for_file: test_types_in_equals
-
 Serializer<SessionType> _$sessionTypeSerializer = new _$SessionTypeSerializer();
 
 class _$SessionTypeSerializer implements StructuredSerializer<SessionType> {
@@ -28,7 +15,7 @@ class _$SessionTypeSerializer implements StructuredSerializer<SessionType> {
   final String wireName = 'SessionType';
 
   @override
-  Iterable serialize(Serializers serializers, SessionType object,
+  Iterable<Object> serialize(Serializers serializers, SessionType object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -49,12 +36,11 @@ class _$SessionTypeSerializer implements StructuredSerializer<SessionType> {
         ..add(serializers.serialize(object.color,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
   @override
-  SessionType deserialize(Serializers serializers, Iterable serialized,
+  SessionType deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SessionTypeBuilder();
 
@@ -109,7 +95,7 @@ class _$SessionType extends SessionType {
   @override
   final String color;
 
-  factory _$SessionType([void updates(SessionTypeBuilder b)]) =>
+  factory _$SessionType([void Function(SessionTypeBuilder) updates]) =>
       (new SessionTypeBuilder()..update(updates)).build();
 
   _$SessionType._(
@@ -133,7 +119,7 @@ class _$SessionType extends SessionType {
   }
 
   @override
-  SessionType rebuild(void updates(SessionTypeBuilder b)) =>
+  SessionType rebuild(void Function(SessionTypeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -225,7 +211,7 @@ class SessionTypeBuilder implements Builder<SessionType, SessionTypeBuilder> {
   }
 
   @override
-  void update(void updates(SessionTypeBuilder b)) {
+  void update(void Function(SessionTypeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -243,3 +229,5 @@ class SessionTypeBuilder implements Builder<SessionType, SessionTypeBuilder> {
     return _$result;
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -74,7 +74,7 @@ class AppStateBloc extends SimpleBloc<AppState> {
             DateTime.now().year, DateTime.now().month, DateTime.now().day);
         final staleConferenceIds = <int>[];
         for (final conferenceId in state.conferences.keys) {
-          String endDateStr = state.conferences[conferenceId].endDate;
+          String endDateStr = state.conferences[conferenceId].toDate;
           try {
             final endDate = DateTime.parse(endDateStr);
             if (today.isAfter(endDate)) {
